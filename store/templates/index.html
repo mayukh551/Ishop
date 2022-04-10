@@ -1,42 +1,58 @@
-{% extends 'base.html'%}
-
-
-{% block content %}
+{% extends 'base.html'%} {% block content %}
 
 <div class="container">
-    <div class="row mx-auto">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="list-group">
+                <a href="/" class="list-group-item list-group-item-action">All</a>
 
+                {% for category in categories %}
 
-        {% for product in products %}
+                <a href="/?category={{category.id}}"
+                    class="list-group-item list-group-item-action">{{category.name}}</a>
 
-        <div class="card mx-auto mb-3" style="width: 18rem;">
-            <img src="{{product.image.url}}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">{{product.name}}</h5>
-                <p class="card-text">{{product.description}}</p>
-                <a href="#" class="btn btn-primary">₹{{product.price}}</a>
+                {% endfor %}
             </div>
         </div>
 
-        {% endfor %}
+        <div id="products" class="col-lg-9">
+            <div class="row mx-auto">
+                <div class="container">
+                    <div class="row gy-5 gx-md-5 justify-content-between">
+                        {% for product in products %}
 
+                        <!-- <div class="card mx-auto mb-3" style="width: 18rem;">
+                    <img src="{{product.image.url}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{product.name}}</h5>
+                        <p class="card-text">{{product.description}}</p>
+                        <a href="#" class="btn btn-primary">₹{{product.price}}</a>
+                    </div>
+                </div> -->
+
+                        <div class="col-lg-4 col-md-6 text-center">
+                            <div class="card box">
+                                <img src="{{product.image.url}}" class="card-img-top img-fluid" alt="..." />
+                                <div class="card-body">
+                                    <h5 class="card-title">{{product.name}}</h5>
+                                    <p class="card-text">{{product.description}}</p>
+                                    <div class="container d-flex justify-content-around align-items-center">
+                                        <a class="fancy" href="#">
+                                            <span class="top-key"></span>
+                                            <span class="text">₹{{product.price}}</span>
+                                            <span class="bottom-key-1"></span>
+                                            <span class="bottom-key-2"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
 </div>
-
-{% for product in products %}
-<table>
-    <tr>
-        <td>{{product.name}}</td>
-        <td>{{product.category.name}}</td>
-        <td>: {{product.price}}</td>
-        <td>: {{product.description}}</td>
-        <td>: {{product.image}}</td>
-        <td><img src="{{product.image}}" alt=""></td>
-    </tr>
-</table>
-{% endfor %}
-
-
 
 {% endblock %}
