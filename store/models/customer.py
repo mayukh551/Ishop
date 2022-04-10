@@ -6,6 +6,7 @@ class Customer(models.Model):
     phone=models.CharField(max_length=15)
     email=models.EmailField()
     password=models.CharField(max_length=500)
+    repassword=models.CharField(max_length=500)
 
     def register(self):
         self.save()

@@ -10,6 +10,20 @@
             
             <form action="/signup" method="POST">
                 {% csrf_token %}
+
+                {% if error %}
+                <div class="alert alert-danger alert-dismissible fade show" style="padding-bottom: 2.5rem;" role="alert">
+                  <button type="button" class="btn-close"  data-bs-dismiss="alert" aria-label="Close"></button>
+                  <strong>{{error}}</strong> 
+                </div>
+                {% endif %}
+                <script>
+                  var alertList = document.querySelectorAll('.alert');
+                  alertList.forEach(function (alert) {
+                    new bootstrap.Alert(alert)
+                  })
+                </script>
+                
                 <div class="form-group">
                     <label for="" class="form-label">First Name:</label>
                     <input type="text" name="firstname" id="" class="form-control form-control-sm"  aria-describedby="helpId">
@@ -34,6 +48,11 @@
                 <div class="form-group">
                     <label for="" class="form-label">Password:</label>
                     <input type="password" name="password" id="" class="form-control form-control-sm" placeholder="*************" aria-describedby="helpId">
+                </div>
+
+                <div class="form-group">
+                    <label for="" class="form-label">Re-enter Password:</label>
+                    <input type="password" name="repassword" id="" class="form-control form-control-sm" placeholder="*************" aria-describedby="helpId">
                 </div>
 
                 <div class="form-group">
