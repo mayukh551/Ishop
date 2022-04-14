@@ -101,3 +101,20 @@ def signup(request):
 def login(request):
     if request.method =='GET':
         return render(request, 'login.html')
+    else:
+        email=request.POST.get('email')
+        password=request.POST.get('password')
+        print(email,password)
+        customer=Customer.getCustomerByEmail(email)
+        print(customer)
+        error_msg=None
+        if customer:
+            flag=check_password(password,customer.password)
+            if flag:
+                return redirect('homepage')
+            else:
+                error_msg = 'Email or password provided is invalid !'
+        else:
+            error_msg='Email or password provided is invalid !'
+
+        return render(request, 'login.html', {'error' : error_msg})
